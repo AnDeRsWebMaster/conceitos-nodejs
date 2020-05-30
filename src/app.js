@@ -32,12 +32,12 @@ app.put("/repositories/:id", (request, response) => {
 
 
   if (!isUuid(id))
-    return response.status(400).json({ erro: "repositorio naão é valido!" })
+    return response.status(400).json({ erro: "Repositorio não é valido!" })
 
   let repository = repositories.find(repository => repository.id === id)
 
   if (!repository)
-    return response.status(400).json({ erro: "não encontrado!!!" })
+    return response.status(400).json({ erro: "Repositorio não encontrado!!!" })
 
   let likes = repository.likes
 
@@ -52,7 +52,7 @@ app.delete("/repositories/:id", (request, response) => {
   const repository = repositories.findIndex(repository => repository.id === id)
 
   if (repository < 0)
-    return response.status(400).json({ erro: "não encontrado!!!" })
+    return response.status(400).json({ erro: "Repositorio não encontrado!!!" })
 
   repositories.splice(repository, 1)
   return response.status(204).send()
@@ -65,7 +65,7 @@ app.post("/repositories/:id/like", (request, response) => {
   const repository = repositories.find(repository => repository.id === id)
 
   if (!repository)
-    return response.status(400).send()
+    return response.status(400).json({ erro: "Repositorio não encontrado!!!" })
 
   repository.likes += 1
   return response.json(repository)
