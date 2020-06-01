@@ -35,13 +35,14 @@ app.put("/repositories/:id", (request, response) => {
     return response.status(400).json({ erro: "Repositorio não é valido!" })
 
   let repository = repositories.find(repository => repository.id === id)
-
+  let repoIndex = repositories.findIndex(repository => repository.id === id)
   if (!repository)
     return response.status(400).json({ erro: "Repositorio não encontrado!!!" })
 
   let likes = repository.likes
 
-  repository = { id, url, title, techs, likes }
+  repository = { id, title, url, techs, likes }
+  repositories[repoIndex] = repository
   return response.json(repository)
 
 });
